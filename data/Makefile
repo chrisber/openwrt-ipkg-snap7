@@ -22,11 +22,12 @@ PKG_BUILD_PARALLEL:=1
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
 
-define Package/snap7
-  SECTION:=libs
-  CATEGORY:=Libraries
-  TITLE:=Multi-platform Ethernet S7 PLC communication suite
-  DEPENDS:=+libstdcpp +libpthread +librt 
+define Package/python-snap7
+  SUBMENU:=Python
+  SECTION:=lang
+  CATEGORY:=Languages  
+  TITLE:=python-snap7
+  DEPENDS:=+libstdcpp +libpthread +librt +libc
 endef
 
 define Package/snap7/description
@@ -45,12 +46,13 @@ define Build/Compile
   CXX="$(TARGET_CROSS)g++"
 endef
 
-define Package/snap7/install
+define Package/python-snap7/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/bin/out/libsnap7.so $(1)/usr/lib
 endef
 
 
 $(eval $(call HostBuild))
-$(eval $(call BuildPackage,snap7))
+$(eval $(call BuildPackage,python-snap7))
+
 
